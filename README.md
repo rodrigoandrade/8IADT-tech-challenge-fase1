@@ -113,9 +113,9 @@ Dados válidos: 1.0 (Sim)  / 2.0 (Não)
 O dataset e o dicionário de dados foram obtidos através do site do Ministério da Saúde: https://dadosabertos.saude.gov.br/dataset/arboviroses-dengue
 
 Dataset - Dengue 2025:
-![alt text](https://github.com/rodrigoandrade/8IADT-tech-challenge-fase1/blob/main/FastAPISaudeDengueFase1/images/dataset.png"Dataset SUS dengue 2025")
+![alt text](https://github.com/rodrigoandrade/8IADT-tech-challenge-fase1/blob/main/FastAPISaudeDengueFase1/images/dataset.png)
 
 
 Dicionario de dados:
-![alt text](https://github.com/rodrigoandrade/8IADT-tech-challenge-fase1/blob/main/FastAPISaudeDengueFase1/images/dicionario_dados.png"Dataset SUS dengue 2025")
+![alt text](https://github.com/rodrigoandrade/8IADT-tech-challenge-fase1/blob/main/FastAPISaudeDengueFase1/images/dicionario_dados.png)
 
