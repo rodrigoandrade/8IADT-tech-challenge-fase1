@@ -7,6 +7,15 @@ app = FastAPI()
 
 @app.post("/predict")
 async def run_predict(input: DengueInput):
+    """
+    Realiza a predição sobre hospitalização do caso de dengue.
+
+    Parâmetros:
+        Input (DengueInput): Objeto contendo dados do paciente.
+
+    Retorno:
+        Resultado da predição.
+    """
 
     dados = input.model_dump()
 
@@ -18,6 +27,19 @@ async def run_predict(input: DengueInput):
     return {"predição": str(interpretar(resultado[0]))}
 
 def interpretar(resultado):
+    """
+        Converte resultado numérico em texto.
+
+        Args:
+            valor (float): resultado da predição
+
+        Returns:
+            str:
+            '1 - Sim, paciente deve ser hospitalizado!'
+            ou
+            '2 - Não, paciente não deve ser hospitalizado!'
+        """
+
     mensagem = ""
     if resultado == 1.0:
         mensagem =  "1 - Sim, paciente deve ser hospitalizado!"
@@ -27,6 +49,12 @@ def interpretar(resultado):
     return mensagem
 
 def registro_cenario_hospitalizacao():
+    """
+        Input válido de caso de hospitação, caso queira usar em alguma requisição para teste.
+
+    Returns:
+        str: registro
+    """
     registro = {
         "FEBRE": 1.0,
         "MIALGIA": 2.0,
