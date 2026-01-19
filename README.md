@@ -117,5 +117,5 @@ Dataset - Dengue 2025:
 
 
 Dicionario de dados:
-https://github.com/rodrigoandrade/8IADT-tech-challenge-fase1/blob/main/FastAPISaudeDengueFase1/images/dicionario_dados.png
+![alt text](https://github.com/rodrigoandrade/8IADT-tech-challenge-fase1/blob/main/FastAPISaudeDengueFase1/images/dicionario_dados.png"Dataset SUS dengue 2025")
 
