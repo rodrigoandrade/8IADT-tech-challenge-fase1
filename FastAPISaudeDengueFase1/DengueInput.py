@@ -1,0 +1,34 @@
+from pydantic import BaseModel
+
+class DengueInput(BaseModel):
+    FEBRE: int
+    MIALGIA: int
+    CEFALEIA: int
+    VOMITO: int
+    NAUSEA: int
+    DOR_COSTAS: int
+    ARTRALGIA: int
+    DOR_RETRO: int
+    RESUL_SORO: int
+    RESUL_NS1: int
+    EVOLUCAO: int
+    ALRM_HIPOT: int
+    ALRM_PLAQ: int
+    ALRM_VOM: int
+    ALRM_SANG: int
+    ALRM_HEMAT: int
+    ALRM_ABDOM: int
+    ALRM_LETAR: int
+    ALRM_HEPAT: int
+    ALRM_LIQ: int
+    GRAV_PULSO: int
+    GRAV_CONV: int
+    GRAV_ENCH: int
+    GRAV_INSUF: int
+    GRAV_TAQUI: int
+    GRAV_EXTRE: int
+    GRAV_HIPOT: int
+    GRAV_HEMAT: int
+    GRAV_MELEN: int
+    GRAV_CONSC: int
+    GRAV_ORGAO: int
