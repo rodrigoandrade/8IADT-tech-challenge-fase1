@@ -9,7 +9,7 @@ Felipe Villa do Conde - rm369942
 # API de Predição de Dengue
 
 Projeto de API desenvolvida em Python usando FastAPI para realizar predições
-de hospitalizações de casos de dengue com base em dados clínicos informados, sendo uma ferramenta para ajuadar a equipe médica a decidir casos de hospitalizações.
+de hospitalizações de casos de dengue com base em dados clínicos informados, sendo uma ferramenta para ajudar a equipe médica a decidir casos de hospitalizações.
 
 ## Tecnologias utilizadas
 
@@ -113,14 +113,9 @@ Dados válidos: 1.0 (Sim)  / 2.0 (Não)
 O dataset e o dicionário de dados foram obtidos através do site do Ministério da Saúde: https://dadosabertos.saude.gov.br/dataset/arboviroses-dengue
 
 Dataset - Dengue 2025:
+![alt text](https://github.com/rodrigoandrade/8IADT-tech-challenge-fase1/blob/main/FastAPISaudeDengueFase1/images/dataset.png"Dataset SUS dengue 2025")
 
 
 Dicionario de dados:
-
-
-
-
-
-
-
+![alt text](https://github.com/rodrigoandrade/8IADT-tech-challenge-fase1/blob/main/FastAPISaudeDengueFase1/images/dicionario_dados.png"Dataset SUS dengue 2025")
 
