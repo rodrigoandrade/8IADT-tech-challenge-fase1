@@ -2,10 +2,21 @@ import pickle
 import pandas as pd
 from DengueInput import DengueInput
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
+from DengueResponse import DengueResponse
+from ErroReponse import ErroResponse
+
 app = FastAPI()
 
-@app.post("/predict")
+@app.post("/predict",
+          summary="Realiza predição de hospitalizações de dengue",
+          description="Endpoint responsável por receber dados clínicos do paciente e retornar a predição de hospitalização.",
+          response_model=DengueResponse,
+          responses={
+              400: {"model": ErroResponse},
+              422: {"model": ErroResponse},
+              500: {"model": ErroResponse}
+          })
 async def run_predict(input: DengueInput):
     """
     Realiza a predição sobre hospitalização do caso de dengue.
@@ -16,12 +27,43 @@ async def run_predict(input: DengueInput):
     Retorno:
         Resultado da predição.
     """
+    try:
+        dados = input.model_dump()
 
-    dados = input.model_dump()
+        modelo_salvo = pickle.load(open("modelo_hospitalizacao.pkl", "rb"))
 
-    modelo_salvo = pickle.load(open("modelo_hospitalizacao.pkl", "rb"))
+        df = pd.DataFrame([dados])
 
-    df = pd.DataFrame([dados])
+        pred = modelo_salvo.predict(df)[0]
+        prob = modelo_salvo.predict_proba(df)[0][0]
+
+        predicao_texto = "Sim" if pred == 1 else "Não"
+
+    except ValueError as e:
+        raise HTTPException(
+            status_code=400,
+            detail={
+                "erro": "Erro de validação",
+                "detalhe": str(e)
+            }
+        )
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail={
+                "erro": "Erro interno",
+                "detalhe": str(e)
+            }
+        )
+
+    return DengueResponse(
+        predicao=interpretar(pred),
+        codigo=int(pred),
+        probabilidade=float(prob),
+        mensagem="Predição realizada com sucesso"
+    )
+
     resultado = modelo_salvo.predict(df)
 
     return {"predição": str(interpretar(resultado[0]))}
@@ -45,85 +87,6 @@ def interpretar(resultado):
         mensagem =  "1 - Sim, paciente deve ser hospitalizado!"
     else:
         mensagem = "2 - Não, paciente não deve ser hospitalizado!"
+
     print(mensagem)
     return mensagem
-
-def registro_cenario_hospitalizacao():
-    """
-        Input válido de caso de hospitação, caso queira usar em alguma requisição para teste.
-
-    Returns:
-        str: registro
-    """
-    registro = {
-        "FEBRE": 1.0,
-        "MIALGIA": 2.0,
-        "CEFALEIA": 1.0,
-        "VOMITO": 2.0,
-        "NAUSEA": 1.0,
-        "DOR_COSTAS": 2.0,
-        "ARTRALGIA": 2.0,
-        "DOR_RETRO": 2.0,
-        "RESUL_SORO": 1.0,
-        "RESUL_NS1": 2.0,
-        "EVOLUCAO": 1.0,
-        "ALRM_HIPOT": 2.0,
-        "ALRM_PLAQ": 1.0,
-        "ALRM_VOM": 2.0,
-        "ALRM_SANG": 2.0,
-        "ALRM_HEMAT": 2.0,
-        "ALRM_ABDOM": 2.0,
-        "ALRM_LETAR": 2.0,
-        "ALRM_HEPAT": 2.0,
-        "ALRM_LIQ": 2.0,
-        "GRAV_PULSO": 2.0,
-        "GRAV_CONV": 2.0,
-        "GRAV_ENCH": 2.0,
-        "GRAV_INSUF": 2.0,
-        "GRAV_TAQUI": 2.0,
-        "GRAV_EXTRE": 2.0,
-        "GRAV_HIPOT": 2.0,
-        "GRAV_HEMAT": 2.0,
-        "GRAV_MELEN": 2.0,
-        "GRAV_CONSC": 2.0,
-        "GRAV_ORGAO": 2.0
-    }
-
-    return registro
-
-def registro_cenario_nao_hospitalizacao():
-    registro = {
-        "FEBRE": 1.0,
-        "MIALGIA": 1.0,
-        "CEFALEIA": 1.0,
-        "VOMITO": 2.0,
-        "NAUSEA": 2.0,
-        "DOR_COSTAS": 1.0,
-        "ARTRALGIA": 1.0,
-        "DOR_RETRO": 1.0,
-        "RESUL_SORO": 1.0,
-        "RESUL_NS1": 4.0,
-        "EVOLUCAO": 1.0,
-        "ALRM_HIPOT": 2.0,
-        "ALRM_PLAQ": 2.0,
-        "ALRM_VOM": 2.0,
-        "ALRM_SANG": 2.0,
-        "ALRM_HEMAT": 2.0,
-        "ALRM_ABDOM": 2.0,
-        "ALRM_LETAR": 2.0,
-        "ALRM_HEPAT": 2.0,
-        "ALRM_LIQ": 2.0,
-        "GRAV_PULSO": 2.0,
-        "GRAV_CONV": 2.0,
-        "GRAV_ENCH": 2.0,
-        "GRAV_INSUF": 2.0,
-        "GRAV_TAQUI": 2.0,
-        "GRAV_EXTRE": 2.0,
-        "GRAV_HIPOT": 2.0,
-        "GRAV_HEMAT": 2.0,
-        "GRAV_MELEN": 2.0,
-        "GRAV_CONSC": 2.0,
-        "GRAV_ORGAO": 2.0
-    }
-
-    return registro

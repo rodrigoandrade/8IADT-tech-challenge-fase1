@@ -1,0 +1,355 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "FastAPI",
+    "version": "0.1.0"
+  },
+  "paths": {
+    "/predict": {
+      "post": {
+        "summary": "Realiza predição de hospitalizações de dengue",
+        "description": "Endpoint responsável por receber dados clínicos do paciente e retornar a predição de hospitalização.",
+        "operationId": "run_predict_predict_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DengueInput"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DengueResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErroResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DengueInput": {
+        "properties": {
+          "FEBRE": {
+            "type": "integer",
+            "title": "Febre",
+            "description": "Paciente apresentou febre? 1 = Sim, 2 = Não",
+            "example": 1
+          },
+          "MIALGIA": {
+            "type": "integer",
+            "title": "Mialgia",
+            "description": "Presença de mialgia (dor muscular)",
+            "example": 1
+          },
+          "CEFALEIA": {
+            "type": "integer",
+            "title": "Cefaleia",
+            "description": "Presença de cefaleia (dor de cabeça)",
+            "example": 2
+          },
+          "VOMITO": {
+            "type": "integer",
+            "title": "Vomito",
+            "description": "Paciente apresentou vômito",
+            "example": 1
+          },
+          "NAUSEA": {
+            "type": "integer",
+            "title": "Nausea",
+            "description": "Paciente presentation náusea",
+            "example": 2
+          },
+          "DOR_COSTAS": {
+            "type": "integer",
+            "title": "Dor Costas",
+            "description": "Presença de dor nas costas",
+            "example": 1
+          },
+          "ARTRALGIA": {
+            "type": "integer",
+            "title": "Artralgia",
+            "description": "Presença de artralgia (dor nas articulações)",
+            "example": 1
+          },
+          "DOR_RETRO": {
+            "type": "integer",
+            "title": "Dor Retro",
+            "description": "Dor retro-orbitária",
+            "example": 2
+          },
+          "RESUL_SORO": {
+            "type": "integer",
+            "title": "Resul Soro",
+            "description": "Resultado do exame de soro",
+            "example": 1
+          },
+          "RESUL_NS1": {
+            "type": "integer",
+            "title": "Resul Ns1",
+            "description": "Resultado do exame NS1",
+            "example": 2
+          },
+          "EVOLUCAO": {
+            "type": "integer",
+            "title": "Evolucao",
+            "description": "Evolução do caso do paciente",
+            "example": 1
+          },
+          "ALRM_HIPOT": {
+            "type": "integer",
+            "title": "Alrm Hipot",
+            "description": "Sinal de alarme: hipotensão",
+            "example": 2
+          },
+          "ALRM_PLAQ": {
+            "type": "integer",
+            "title": "Alrm Plaq",
+            "description": "Sinal de alarme: queda de plaquetas",
+            "example": 1
+          },
+          "ALRM_VOM": {
+            "type": "integer",
+            "title": "Alrm Vom",
+            "description": "Sinal de alarme: vômitos persistentes",
+            "example": 2
+          },
+          "ALRM_SANG": {
+            "type": "integer",
+            "title": "Alrm Sang",
+            "description": "Sinal de alarme: sangramento",
+            "example": 2
+          },
+          "ALRM_HEMAT": {
+            "type": "integer",
+            "title": "Alrm Hemat",
+            "description": "Sinal de alarme: alteração hematológica",
+            "example": 2
+          },
+          "ALRM_ABDOM": {
+            "type": "integer",
+            "title": "Alrm Abdom",
+            "description": "Sinal de alarme: dor abdominal intensa",
+            "example": 2
+          },
+          "ALRM_LETAR": {
+            "type": "integer",
+            "title": "Alrm Letar",
+            "description": "Sinal de alarme: letargia",
+            "example": 2
+          },
+          "ALRM_HEPAT": {
+            "type": "integer",
+            "title": "Alrm Hepat",
+            "description": "Sinal de alarme: aumento do fígado",
+            "example": 2
+          },
+          "ALRM_LIQ": {
+            "type": "integer",
+            "title": "Alrm Liq",
+            "description": "Sinal de alarme: acúmulo de líquidos",
+            "example": 2
+          },
+          "GRAV_PULSO": {
+            "type": "integer",
+            "title": "Grav Pulso",
+            "description": "Sinal de gravidade: pulso fraco",
+            "example": 2
+          },
+          "GRAV_CONV": {
+            "type": "integer",
+            "title": "Grav Conv",
+            "description": "Sinal de gravidade: convulsões",
+            "example": 2
+          },
+          "GRAV_ENCH": {
+            "type": "integer",
+            "title": "Grav Ench",
+            "description": "Sinal de gravidade: enchimento capilar alterado",
+            "example": 2
+          },
+          "GRAV_INSUF": {
+            "type": "integer",
+            "title": "Grav Insuf",
+            "description": "Sinal de gravidade: insuficiência respiratória",
+            "example": 2
+          },
+          "GRAV_TAQUI": {
+            "type": "integer",
+            "title": "Grav Taqui",
+            "description": "Sinal de gravidade: taquicardia",
+            "example": 2
+          },
+          "GRAV_EXTRE": {
+            "type": "integer",
+            "title": "Grav Extre",
+            "description": "Sinal de gravidade: extremidades frias",
+            "example": 2
+          },
+          "GRAV_HIPOT": {
+            "type": "integer",
+            "title": "Grav Hipot",
+            "description": "Sinal de gravidade: hipotensão grave",
+            "example": 2
+          },
+          "GRAV_HEMAT": {
+            "type": "integer",
+            "title": "Grav Hemat",
+            "description": "Sinal de gravidade: alteração grave hematológica",
+            "example": 2
+          },
+          "GRAV_MELEN": {
+            "type": "integer",
+            "title": "Grav Melen",
+            "description": "Sinal de gravidade: presença de melena",
+            "example": 2
+          },
+          "GRAV_CONSC": {
+            "type": "integer",
+            "title": "Grav Consc",
+            "description": "Sinal de gravidade: alteração do nível de consciência",
+            "example": 2
+          },
+          "GRAV_ORGAO": {
+            "type": "integer",
+            "title": "Grav Orgao",
+            "description": "Sinal de gravidade: comprometimento de órgão",
+            "example": 2
+          }
+        },
+        "type": "object",
+        "required": [
+          "FEBRE",
+          "MIALGIA",
+          "CEFALEIA",
+          "VOMITO",
+          "NAUSEA",
+          "DOR_COSTAS",
+          "ARTRALGIA",
+          "DOR_RETRO",
+          "RESUL_SORO",
+          "RESUL_NS1",
+          "EVOLUCAO",
+          "ALRM_HIPOT",
+          "ALRM_PLAQ",
+          "ALRM_VOM",
+          "ALRM_SANG",
+          "ALRM_HEMAT",
+          "ALRM_ABDOM",
+          "ALRM_LETAR",
+          "ALRM_HEPAT",
+          "ALRM_LIQ",
+          "GRAV_PULSO",
+          "GRAV_CONV",
+          "GRAV_ENCH",
+          "GRAV_INSUF",
+          "GRAV_TAQUI",
+          "GRAV_EXTRE",
+          "GRAV_HIPOT",
+          "GRAV_HEMAT",
+          "GRAV_MELEN",
+          "GRAV_CONSC",
+          "GRAV_ORGAO"
+        ],
+        "title": "DengueInput"
+      },
+      "DengueResponse": {
+        "properties": {
+          "predicao": {
+            "type": "string",
+            "title": "Predicao",
+            "description": "Resultado textual da predição",
+            "example": "Sim"
+          },
+          "codigo": {
+            "type": "integer",
+            "title": "Codigo",
+            "description": "Código numérico retornado pelo modelo (1 ou 2)",
+            "example": 1
+          },
+          "probabilidade": {
+            "type": "number",
+            "title": "Probabilidade",
+            "description": "Probabilidade estimada pelo modelo",
+            "example": 0.87
+          },
+          "mensagem": {
+            "type": "string",
+            "title": "Mensagem",
+            "description": "Mensagem explicativa do resultado",
+            "example": "Alta probabilidade de hospitalização positiva"
+          }
+        },
+        "type": "object",
+        "required": [
+          "predicao",
+          "codigo",
+          "probabilidade",
+          "mensagem"
+        ],
+        "title": "DengueResponse"
+      },
+      "ErroResponse": {
+        "properties": {
+          "erro": {
+            "type": "string",
+            "title": "Erro",
+            "description": "Tipo do erro ocorrido",
+            "example": "Erro de validação"
+          },
+          "detalhe": {
+            "type": "string",
+            "title": "Detalhe",
+            "description": "Descrição detalhada do erro",
+            "example": "Campo FEBRE inválido"
+          }
+        },
+        "type": "object",
+        "required": [
+          "erro",
+          "detalhe"
+        ],
+        "title": "ErroResponse"
+      }
+    }
+  }
+}
