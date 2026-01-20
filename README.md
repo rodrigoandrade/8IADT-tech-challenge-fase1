@@ -11,6 +11,8 @@ Felipe Villa do Conde - rm369942
 Projeto de API desenvolvida em Python usando FastAPI para realizar predições
 de hospitalizações de casos de dengue com base em dados clínicos informados, sendo uma ferramenta para ajudar a equipe médica a decidir casos de hospitalizações.
 
+### Projeto se encontra no diretório FastAPISaudeDengueFase1
+
 ## Tecnologias utilizadas
 
 - Python 3.12
