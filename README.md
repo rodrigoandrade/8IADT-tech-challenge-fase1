@@ -8,10 +8,9 @@ Felipe Villa do Conde - rm369942
 
 # API de Predição de Dengue
 
-Projeto de API desenvolvida em Python usando FastAPI para realizar predições
-de hospitalizações de casos de dengue com base em dados clínicos informados, sendo uma ferramenta para ajudar a equipe médica a decidir casos de hospitalizações.
+Projeto de API desenvolvida em Python usando FastAPI para realizar predições de hospitalizações de casos de dengue com base em dados clínicos informados, sendo uma ferramenta para ajudar a equipe médica a decidir casos de hospitalizações.
 
-### Projeto se encontra no diretório FastAPISaudeDengueFase1
+## Projeto se encontra no diretório FastAPISaudeDengueFase1
 
 ## Tecnologias utilizadas
 
@@ -53,7 +52,11 @@ Endpoint: http://127.0.0.1:8000/docs
 
 ## Como executar com Docker
 
+### Criar imagem
+
 docker build -t api-dengue .
+
+### Rodar docker
 
 docker run -p 8001:8001 api-dengue
 

@@ -9,7 +9,7 @@ from ErroReponse import ErroResponse
 app = FastAPI()
 
 @app.post("/predict",
-          summary="Realiza predição de hospitalizações de dengue",
+          summary="Realiza predição de hospitalizações de dengue. Valores payload: 1-Sim / 2- Não",
           description="Endpoint responsável por receber dados clínicos do paciente e retornar a predição de hospitalização.",
           response_model=DengueResponse,
           responses={
@@ -22,7 +22,7 @@ async def run_predict(input: DengueInput):
     Realiza a predição sobre hospitalização do caso de dengue.
 
     Parâmetros:
-        Input (DengueInput): Objeto contendo dados do paciente.
+        Input (DengueInput): Objeto contendo dados do paciente 1 = Sim, 2 = Não.
 
     Retorno:
         Resultado da predição.
